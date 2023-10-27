@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   container: {},
   title: {
     fontSize: 12,
-    fontWeight: "bold",
+    fontFamily:'exo-400',
     color: colors.grey,
     marginBottom: 12,
   },

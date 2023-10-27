@@ -102,16 +102,19 @@ const styles = StyleSheet.create({
   },
   skip: {
     color: colors.blue,
+    fontFamily:'exo-400',
     fontSize: 18,
   },
   footerText: {
     color: colors.grey,
+    fontFamily:'exo-400',
     marginTop: 33,
     fontSize: 18,
     textAlign: "center",
   },
   footerLink: {
     color: colors.blue,
+    fontFamily:'exo-400',
   },
 });
 

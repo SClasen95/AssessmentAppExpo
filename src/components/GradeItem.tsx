@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight:'500',
+    fontFamily:'exo-500',
     color:colors.darkGrey,
   },
 });

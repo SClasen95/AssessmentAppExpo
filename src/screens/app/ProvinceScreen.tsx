@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.darkGrey,
     fontSize: 25,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
     marginTop: 30,
   },
   dropdownContainer: {

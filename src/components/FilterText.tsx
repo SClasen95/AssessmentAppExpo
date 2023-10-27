@@ -32,11 +32,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
       },
       filter: {
+        fontFamily:'exo-400',
         color:colors.darkGrey,
         fontSize:16,
       },
       selectedFilter: {
         color:colors.white,
+        fontFamily:'exo-400',
         fontSize:16,
       },
   });

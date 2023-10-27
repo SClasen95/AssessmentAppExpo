@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
   },
   image: {},
   title: {
+    fontFamily:'exo-600',
     fontSize: 20,
-    fontWeight: "bold",
     color: colors.darkGrey,
     marginVertical: 35,
   },
   subtitle: {
+    fontFamily:'exo-500',
     fontSize: 18,
-    fontWeight: "500",
     color: colors.grey,
     textAlign: "center",
   },
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
   skip: {
     color: colors.blue,
+    fontFamily:'exo-400',
     fontSize: 18,
   },
 });

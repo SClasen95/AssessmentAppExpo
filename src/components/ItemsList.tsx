@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
     color: colors.darkGrey,
   },
   horizontalList: {
@@ -185,11 +185,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
   },
-  itemTitle: {
-    marginTop: 8,
-    fontSize: 14,
-    color: colors.darkGrey,
-  },
+
 });
 
 export default React.memo(ItemsList);

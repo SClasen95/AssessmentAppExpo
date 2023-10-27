@@ -107,12 +107,14 @@ const styles = StyleSheet.create({
     marginBottom: 76,
   },
   footerText: {
+    fontFamily:'exo-400',
     color: colors.grey,
     marginTop: 33,
     fontSize: 18,
     textAlign: "center",
   },
   footerLink: {
+    fontFamily:'exo-400',
     color: colors.blue,
   },
 });

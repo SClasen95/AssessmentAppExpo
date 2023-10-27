@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
     marginTop: 6,
     color: colors.darkGrey,
   },

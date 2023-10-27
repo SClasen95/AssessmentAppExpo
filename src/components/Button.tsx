@@ -31,9 +31,9 @@ export const styles = StyleSheet.create({
     width:'100%'
   },
   title: {
+    fontFamily:'exo-600',
     color: colors.white,
     textAlign: "center",
     fontSize: 20,
-    fontWeight: "bold",
   },
 });

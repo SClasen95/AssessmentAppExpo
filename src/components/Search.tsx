@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    fontFamily:'exo-400',
     paddingRight: 10,
     paddingLeft: 29,
   },

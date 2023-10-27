@@ -70,19 +70,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
     color: colors.darkGrey,
   },
   subtitle: {
     fontSize: 12,
     color: colors.grey,
     marginTop: 8,
-    fontWeight:'bold'
+    fontFamily:'exo-600',
   },
   description: {
     fontSize: 12,
     fontWeight:'300',
-    fontFamily:'Roboto',
     color: colors.darkGrey,
   },
 });

@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
     color: colors.darkGrey,
   },
   subtitle: {
     fontSize: 20,
+    fontFamily:'exo-600',
     color: colors.grey,
-    fontWeight: "bold",
   },
   imageContainer: {
     width: 62,

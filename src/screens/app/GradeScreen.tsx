@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.darkGrey,
-    fontSize: 25,
-    fontWeight: "bold",
+    fontFamily:'exo-600',
+    fontSize: 25,    
     marginTop: 30,
   },
   dropdownContainer: {
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     bottom: 76,
   },
   skip: {
+    fontFamily:'exo-400',
     color: colors.blue,
     fontSize: 18,
     textAlign: "center",

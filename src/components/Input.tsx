@@ -17,7 +17,7 @@ interface InputProps {
   onChangeText?: (text: string) => void;
   placeholder: string;
   style?: object;
-  keyboardType?:KeyboardTypeOptions;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 function Input({
@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     color: colors.grey,
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: "exo-500",
   },
   inputContainer: {
     backgroundColor: colors.white,
@@ -114,31 +114,5 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     flex: 1,
     color: colors.lightGrey,
-  },
-  modalWrapper: {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-  modalContent: {
-    backgroundColor: colors.white,
-    borderRadius: 8,
-    padding: 16,
-    width: "80%",
-  },
-  headerTitle: {
-    color: colors.black,
-    marginBottom: 16,
-    fontSize: 16,
-  },
-  optionText: {
-    color: colors.black,
-    paddingVertical: 4,
-    fontSize: 16,
-  },
-  selectedOption: {
-    color: colors.blue,
-    fontWeight: "bold",
   },
 });
