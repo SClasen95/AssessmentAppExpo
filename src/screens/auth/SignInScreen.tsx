@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "80%",
-    position: "relative",
-    marginBottom: 76,
+    marginTop:55,
+    
   },
   skip: {
     color: colors.blue,
