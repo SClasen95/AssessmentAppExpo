@@ -29,7 +29,9 @@ function MainScreen() {
   }
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
+    <ScrollView contentInsetAdjustmentBehavior="automatic"
+    showsVerticalScrollIndicator={false}
+    >
       <Header searchValue={searchValue} onSearchPress={onSearchPress} />
       <ItemsList
         title="Popular Teachers"

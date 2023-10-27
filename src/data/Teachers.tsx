@@ -4,7 +4,7 @@ import { Subjects } from "./Subjects";
 
 export interface TeacherType {
   title: string;
-  image: any;
+  image: NodeRequire;
   subtitle: string;
   color: string;
   location: string;

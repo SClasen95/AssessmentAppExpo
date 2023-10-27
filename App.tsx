@@ -68,7 +68,7 @@ function App() {
       <AppLoading
         startAsync={getFonts}
         onFinish={() => setFontsLoaded(true)}
-        onError={()=>null}
+        onError={()=>console.log("Error loading fonts.")}
       />
     );
   }

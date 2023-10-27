@@ -39,7 +39,7 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Image
           style={styles.image}

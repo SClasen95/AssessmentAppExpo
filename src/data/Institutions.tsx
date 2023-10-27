@@ -4,11 +4,11 @@ import { Locations } from "./Locations";
 
 export interface InstitutionType {
   title: string;
-  image: any;
-  subtitle: string;
+  image: NodeRequire;
+  subtitle: InstitutionSubjects;
   description: string;
   color: string;
-  location: string;
+  location: Locations;
   totalReviews: number;
   avgRating: number;
 }

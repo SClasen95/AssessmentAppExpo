@@ -1,7 +1,7 @@
 export interface GradeType {
   title?: string;
   id?: number;
-  image?: any;
+  image?: NodeRequire;
   type: "grade";
 }
 

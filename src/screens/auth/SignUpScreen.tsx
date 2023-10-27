@@ -43,7 +43,7 @@ function SignUpScreen({ navigation }: SignUpScreenNavigationProp) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Image
           style={styles.image}
