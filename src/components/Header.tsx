@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, UIManager, LayoutAnimation } from "react-native";
 import { colors } from "../utils/colors";
 import Search from "./Search";
 import { UserContext } from "../../App";
+
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
 interface HeaderProps {
   onSearchPress: (str: string) => void;
@@ -12,6 +14,11 @@ interface HeaderProps {
 function Header({ onSearchPress, searchValue }: HeaderProps) {
   const [showHeader, setShowHeader] = useState(true);
   const userData = useContext(UserContext);
+
+  const toggleHeader = () => {
+     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); 
+    setShowHeader(!showHeader);
+  };
 
   return (
     <View style={styles.headerContainer}>
@@ -39,8 +46,8 @@ function Header({ onSearchPress, searchValue }: HeaderProps) {
           }}
           onSearchPress={(text) => onSearchPress(text)}
           searchValue={searchValue}
-          onFocus={()=>setShowHeader(false)}
-          onBlur = {()=>setShowHeader(true)}
+          onFocus={toggleHeader}
+          onBlur = {toggleHeader}
         />
       </View>
     </View>

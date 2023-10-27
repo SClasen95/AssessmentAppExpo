@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import { colors } from "../utils/colors";
-import GradeItem from "./GradeItem";
-import { ProvinceType } from "../data/Provinces";
-import { GradeType } from "../data/Grades";
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  LayoutAnimation,
+  UIManager,
+} from 'react-native';
+import { colors } from '../utils/colors';
+import GradeItem from './GradeItem';
+import { ProvinceType } from '../data/Provinces';
+import { GradeType } from '../data/Grades';
+
+// Enable layout animation
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
 interface ExpandableDropdownProps {
   title: string;
@@ -25,9 +36,12 @@ function ExpandableDropdown({
   const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
 
   const toggleExpand = () => {
-    isOpen ? onClose!() : onSelect!();
+    if (isExpandable) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Add animation configuration
+      isOpen ? onClose!() : onSelect!();
+    }
   };
-  const onItemPress = (title: string|undefined) => {
+  const onItemPress = (title: string | undefined) => {
     setSelectedOption(title);
   };
 
@@ -39,7 +53,7 @@ function ExpandableDropdown({
       <TouchableOpacity
         activeOpacity={1}
         style={styles.header}
-        onPress={isExpandable ? toggleExpand : undefined}
+        onPress={toggleExpand}
       >
         <Text style={styles.title}>{title}</Text>
         {isExpandable && (
@@ -47,8 +61,8 @@ function ExpandableDropdown({
             style={styles.arrow}
             source={
               isOpen
-                ? require("../assets/uparrow.png")
-                : require("../assets/downarrow.png")
+                ? require('../assets/uparrow.png')
+                : require('../assets/downarrow.png')
             }
           />
         )}
@@ -62,13 +76,13 @@ function ExpandableDropdown({
                 activeOpacity={1}
                 key={option.title}
                 style={{ width: `${columnWidth}%` }}
-                onPress={() => onItemPress(option.title)} 
+                onPress={() => onItemPress(option.title)}
               >
                 <GradeItem
-                  imgReq = {option.type==="grade"}
+                  imgReq={option.type === 'grade'}
                   title={option.title}
-                  imageSource={option.type==="grade" ? option.image : null}
-                  isSelected={option.title === selectedOption} 
+                  imageSource={option.type === 'grade' ? option.image : null}
+                  isSelected={option.title === selectedOption}
                 />
               </TouchableOpacity>
             ))}
@@ -87,21 +101,20 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
     backgroundColor: colors.cream,
   },
   title: {
-    fontWeight: "bold",
-    fontSize:18,
+    fontWeight: 'bold',
     color:colors.grey,
+    fontSize:18,
   },
   arrow: {
     width: 20,
     height: 20,
-    transform: [{ scaleY: 1 }],
   },
   expandedOptions: {
     padding: 10,
@@ -110,13 +123,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   optionsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   optionText: {
     padding: 5,
-    width: "48%",
+    width: '48%',
   },
 });
 
