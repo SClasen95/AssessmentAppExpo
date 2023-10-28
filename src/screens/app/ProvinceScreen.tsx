@@ -1,6 +1,6 @@
 import React from "react";
 import ExpandableDropdown from "../../components/ExpandableDropdown";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../utils/colors";
 import Button from "../../components/Button";
 import { Provinces } from "../../data/Provinces";
@@ -57,9 +57,11 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     marginTop: 31,
+    width: Platform.OS ==="web" ? "25%" : "100%",
+    alignSelf:'center'
   },
   buttonContainer: {
-    width: "80%",
+    width: Platform.OS ==="web" ? "25%" : "80%",
     alignSelf: "center",
     position: "absolute",
     bottom: 76,

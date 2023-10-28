@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, Platform, TouchableOpacity } from "react-native";
 import { colors } from "../utils/colors";
 import Teacher from "./Teacher";
 import Institution from "./Institution";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import Filter from "./Filter";
 import { TeacherType } from "./../data/Teachers";
 import { InstitutionType } from "./../data/Institutions";
@@ -136,11 +135,12 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
         </>
       )}
 
-      <View style={horizontal ? styles.horizontalList : styles.verticalList}>
+      <View style={horizontal ? styles.horizontalList : Platform.OS === 'web' ? styles.verticalListWeb : null}>
         <FlatList
           showsHorizontalScrollIndicator={false}
           horizontal={horizontal}
           scrollEnabled={horizontal}
+          numColumns={(!horizontal && Platform.OS==='web') ? 2 : undefined}
           data={filteredItems}
           renderItem={horizontal ? renderTeacherItem : renderInstitutionItem}
           keyExtractor={(item, index) => String(index)}
@@ -174,11 +174,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  verticalList: {},
-  itemContainer: {
-    marginBottom: 16,
-    width: 120,
-    alignItems: "center",
+  verticalListWeb:{
   },
   itemImage: {
     width: 80,

@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from "react-native";
 import { colors } from "../utils/colors";
 
@@ -24,7 +25,7 @@ const SearchBar = ({
   onBlur,
 }: SearchBarProps) => {
   return (
-    <View style={styles.container}>
+    <View style={Platform.OS ==='web' ? styles.webContainer : styles.container}>
       <View style={styles.searchContainer}>
         <TextInput
           placeholder="Search..."
@@ -59,6 +60,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 29,
+  },
+  webContainer:{
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 29,
+    flex:1
   },
   searchContainer: {
     flexDirection: "row",

@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet, Platform } from "react-native";
 import { colors } from "../utils/colors";
 import StarRating from "./StarRating";
 
-
 interface InstitutionProps {
   imageSource: any;
   title: string;
@@ -24,7 +23,9 @@ function Institution({
   totalReviews,
 }: InstitutionProps) {
   return (
-    <View style={styles.container}>
+    <View
+      style={Platform.OS === "web" ? styles.containerWeb : styles.container}
+    >
       <View style={[styles.imageContainer, { backgroundColor: color }]}>
         <Image source={imageSource} style={styles.image} />
       </View>
@@ -55,6 +56,23 @@ const styles = StyleSheet.create({
 
     elevation: 5,
   },
+  containerWeb: {
+    flexDirection: "row",
+    backgroundColor: colors.white,
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width: "45%",
+    margin:10
+  },
   imageContainer: {
     borderRadius: 10,
     width: "100%",
@@ -70,18 +88,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily:'exo-600',
+    fontFamily: "exo-600",
     color: colors.darkGrey,
   },
   subtitle: {
     fontSize: 12,
     color: colors.grey,
     marginTop: 8,
-    fontFamily:'exo-600',
+    fontFamily: "exo-600",
   },
   description: {
     fontSize: 12,
-    fontWeight:'300',
+    fontWeight: "300",
     color: colors.darkGrey,
   },
 });

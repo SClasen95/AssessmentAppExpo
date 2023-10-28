@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Image, StyleSheet, UIManager, LayoutAnimation } from "react-native";
+import { View, Text, Image, StyleSheet, UIManager, LayoutAnimation, Platform } from "react-native";
 import { colors } from "../utils/colors";
 import Search from "./Search";
 import { UserContext } from "../../App";
@@ -39,7 +39,7 @@ function Header({ onSearchPress, searchValue }: HeaderProps) {
       )}
 
       {/* Bottom Row */}
-      <View style={styles.bottomRow}>
+      <View style={Platform.OS === 'web' ? styles.bottomRowWeb : styles.bottomRow}>
         <Search
           onFilterPress={function (): void {
             console.log("Filter button pressed");
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  bottomRowWeb:{
+    flexDirection: "row",
+    alignSelf: "center",
+    width:'50%',
+  }
 });
 
 export default React.memo(Header);

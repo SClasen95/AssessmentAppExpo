@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Image, StyleSheet, Text, View, Alert } from "react-native";
+import { Image, StyleSheet, Text, View, Alert, Platform } from "react-native";
 import Button from "../../components/Button";
 import { colors } from "../../utils/colors";
 import Input from "../../components/Input";
@@ -94,9 +94,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 85,
+    width: Platform.OS ==="web" ? "25%" : "100%",
   },
   buttonContainer: {
-    width: "80%",
+    width: Platform.OS ==="web" ? "25%" : "80%",
     marginTop:55,
     
   },

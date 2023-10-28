@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, Platform } from 'react-native';
 import Button from "../../components/Button";
 import { colors } from "../../utils/colors";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -15,7 +15,7 @@ function SplashScreen({ navigation }: SplashScreenNavigationProp) {
 
   return (
     <View style={styles.container}>
-      <Image resizeMode="contain" source={require("../../assets/splash.png")} />
+      <Image style={styles.image} resizeMode="contain" source={require("../../assets/splash.png")} />
       <Text style={styles.title}>Let's find the "A" with us</Text>
       <Text style={styles.subtitle}>
         Please Sign in to view personalized recommendations
@@ -39,7 +39,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
   },
-  image: {},
+  image: {
+    width: "100%", // Adjust image width for responsive design
+    
+  },
   title: {
     fontFamily:'exo-600',
     fontSize: 20,
@@ -53,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    width: "80%",
+    width: Platform.OS ==="web" ? "25%" : "80%",
     flexDirection: "row",
     marginTop: 106,
     marginBottom: 33,

@@ -7,11 +7,10 @@
 
 import React, { useState } from "react";
 import { Platform, StatusBar, useColorScheme } from "react-native";
-
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import StackNavigator from "./src/components/navigators/StackNavigator";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import { colors } from "./src/utils/colors";
 
 interface UserData {
   userName: string;
@@ -47,16 +46,14 @@ function App() {
   const isDarkMode = useColorScheme() === "dark";
   const [user, setUser] = useState<UserData | undefined>(undefined);
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+
 
   if (fontsLoaded) {
     return (
       <>
         <StatusBar
           barStyle={isDarkMode ? "light-content" : "dark-content"}
-          backgroundColor={backgroundStyle.backgroundColor}
+          backgroundColor={colors.background}
         />
         <UserContext.Provider value={{ user, setUser }}>
           <StackNavigator />

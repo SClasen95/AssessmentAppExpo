@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { Platform, ScrollView, StyleSheet } from "react-native";
 import Header from "../../components/Header";
 import { TeacherType, Teachers } from "../../data/Teachers";
 import ItemsList from "../../components/ItemsList";
@@ -29,9 +29,9 @@ function MainScreen() {
   }
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic"
+    <ScrollView style={Platform.OS === 'web' ? styles.webView : null} contentInsetAdjustmentBehavior="automatic"
     showsVerticalScrollIndicator={false}
-    >
+    >      
       <Header searchValue={searchValue} onSearchPress={onSearchPress} />
       <ItemsList
         title="Popular Teachers"
@@ -49,3 +49,11 @@ function MainScreen() {
   );
 }
 export default React.memo(MainScreen);
+
+const styles = StyleSheet.create({
+  webView:{
+    width: '80%',
+    alignSelf:'center'
+  },
+
+})

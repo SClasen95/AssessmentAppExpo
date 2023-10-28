@@ -15,5 +15,6 @@ export const colors = {
     brown: '#CD853F',
     lightPurple: '#DDE1FF',
     lightPink: '#FF9F92',
-    lightBlue: '#BFDDEC'
+    lightBlue: '#BFDDEC',
+    background:'#F4F5F9'
 }
