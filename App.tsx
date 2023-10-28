@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from "react";
-import { Platform, StatusBar, useColorScheme } from "react-native";
+import { StatusBar, useColorScheme } from "react-native";
 import StackNavigator from "./src/components/navigators/StackNavigator";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";

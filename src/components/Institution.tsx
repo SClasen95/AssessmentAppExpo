@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     width: "45%",
-    margin:10
+    margin: 10,
   },
   imageContainer: {
     borderRadius: 10,
@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: Platform.OS === "web" ? 14 : 12,
     color: colors.grey,
     marginTop: 8,
     fontFamily: "exo-600",
   },
   description: {
-    fontSize: 12,
+    fontSize: Platform.OS === "web" ? 14 : 12,
     fontWeight: "300",
     color: colors.darkGrey,
   },

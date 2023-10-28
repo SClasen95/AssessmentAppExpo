@@ -7,6 +7,8 @@ import SignUpScreen from "../../screens/auth/SignUpScreen";
 import GradeScreen from "../../screens/app/GradeScreen";
 import ProvinceScreen from "../../screens/app/ProvinceScreen";
 import TabNavigator from "./TabNavigator";
+import { Platform } from "react-native";
+import { colors } from "../../utils/colors";
 
 export type StackParamList = {
   SplashScreen: undefined;
@@ -22,7 +24,17 @@ function StackNavigator() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: Platform.OS === "web",
+            headerStyle: {
+              backgroundColor: 'transparent',
+              borderWidth:0,
+            },
+            headerTitle: ""
+            
+          }}
+        >
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="SignInScreen" component={SignInScreen} />
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} />

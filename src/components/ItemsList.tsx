@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, FlatList, Platform, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { colors } from "../utils/colors";
 import Teacher from "./Teacher";
 import Institution from "./Institution";
@@ -106,13 +114,17 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
         <Text style={styles.title}>{title}</Text>
         {!isSearch && (
           <TouchableOpacity onPress={onFilterPress}>
-            <Image
-              source={
-                isFilterOpen
-                  ? require("../assets/openFilter.png")
-                  : require("../assets/listFilter.png")
-              }
-            />
+            {Platform.OS === "web" ? (
+              <Text style={styles.webFilters}>Filters</Text>
+            ) : (
+              <Image
+                source={
+                  isFilterOpen
+                    ? require("../assets/openFilter.png")
+                    : require("../assets/listFilter.png")
+                }
+              />
+            )}
           </TouchableOpacity>
         )}
       </View>
@@ -135,12 +147,20 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
         </>
       )}
 
-      <View style={horizontal ? styles.horizontalList : Platform.OS === 'web' ? styles.verticalListWeb : null}>
+      <View
+        style={
+          horizontal
+            ? styles.horizontalList
+            : Platform.OS === "web"
+            ? styles.verticalListWeb
+            : null
+        }
+      >
         <FlatList
           showsHorizontalScrollIndicator={false}
           horizontal={horizontal}
           scrollEnabled={horizontal}
-          numColumns={(!horizontal && Platform.OS==='web') ? 2 : undefined}
+          numColumns={!horizontal && Platform.OS === "web" ? 2 : undefined}
           data={filteredItems}
           renderItem={horizontal ? renderTeacherItem : renderInstitutionItem}
           keyExtractor={(item, index) => String(index)}
@@ -161,12 +181,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 30,
-    marginRight: 53,
+    marginRight: 50,    
   },
   title: {
     fontSize: 20,
-    fontFamily:'exo-600',
+    fontFamily: "exo-600",
     color: colors.darkGrey,
+  },
+  webFilters: {
+    color: colors.blue,
+    fontSize: 16,
   },
   horizontalList: {
     flexDirection: "row",
@@ -174,14 +198,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  verticalListWeb:{
-  },
-  itemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-
+  verticalListWeb: {},
 });
 
 export default React.memo(ItemsList);

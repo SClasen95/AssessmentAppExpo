@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Platform } from "react-native";
 import { colors } from "../utils/colors";
 
 interface StarRatingProps {
@@ -29,7 +29,7 @@ function StarRating({ totalReviews, averageScore }: StarRatingProps) {
     <View style={styles.container}>
       <View style={styles.starContainer}>
         {stars.map((type, index) => (
-          <Image key={index} source={starImages[type]} style={styles.star} />
+          <Image key={index} source={starImages[type]} style={Platform.OS === 'web' ? styles.starWeb : styles.star} />
         ))}
       </View>
       <View style={styles.textContainer}>
@@ -60,12 +60,17 @@ const styles = StyleSheet.create({
     height: 8,
     marginRight: 2,
   },
+  starWeb: {
+    width: 14,
+    height: 14,
+    marginRight: 2,
+  },
   textContainer: {
     marginLeft: 5,
     flexDirection: "row",
   },
   text: {
-    fontSize: 8,
+    fontSize: Platform.OS === 'web' ? 14 : 8,
     color: colors.darkGrey,
   },
 });
