@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Image, StyleSheet, Text, View, Alert, Platform } from "react-native";
+import { Image, StyleSheet, Text, View, Alert, Platform, ScrollView } from "react-native";
 import Button from "../../components/Button";
 import { colors } from "../../utils/colors";
 import Input from "../../components/Input";
 import { StackScreenProps } from "@react-navigation/stack";
 import { UserContext } from "../../../App";
-import { ScrollView } from "react-native-gesture-handler";
 import { ValidUsers } from "../../data/ValidUsers";
 import { StackParamList } from "../../components/navigators/StackNavigator";
 

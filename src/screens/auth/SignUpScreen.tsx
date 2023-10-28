@@ -1,11 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Image, StyleSheet, Text, View, Alert, Platform } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Platform,
+  ScrollView,
+} from "react-native";
 import Button from "../../components/Button";
 import { colors } from "../../utils/colors";
 import Input from "../../components/Input";
 import { StackScreenProps } from "@react-navigation/stack";
 import { UserContext } from "../../../App";
-import { ScrollView } from "react-native-gesture-handler";
 import { ValidUserType } from "../../data/ValidUsers";
 import { StackParamList } from "../../components/navigators/StackNavigator";
 
@@ -100,22 +107,22 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 51,
-    width: Platform.OS ==="web" ? "25%" : "100%",
+    width: Platform.OS === "web" ? "25%" : "100%",
   },
   buttonContainer: {
-    width: Platform.OS ==="web" ? "25%" : "80%",
+    width: Platform.OS === "web" ? "25%" : "80%",
     position: "relative",
     marginBottom: 76,
   },
   footerText: {
-    fontFamily:'exo-400',
+    fontFamily: "exo-400",
     color: colors.grey,
     marginTop: 33,
     fontSize: 18,
     textAlign: "center",
   },
   footerLink: {
-    fontFamily:'exo-400',
+    fontFamily: "exo-400",
     color: colors.blue,
   },
 });
