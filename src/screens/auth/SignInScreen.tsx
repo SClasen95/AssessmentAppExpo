@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
   Platform,
   ScrollView,
   UIManager,
@@ -130,7 +129,7 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
             <>
               <Button title={"Sign Up"} onPress={onSignUp} />
               <Text style={styles.footerText}>
-                You have account?
+                You have an account?
                 <Text style={styles.footerLink} onPress={togleView}>
                   {" "}
                   Sign In

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   image: {
-    width: "100%", // Adjust image width for responsive design
+    width: "100%",
     
   },
   title: {

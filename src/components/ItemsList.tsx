@@ -25,16 +25,19 @@ interface ItemsListProps {
 }
 
 function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
+  const ALL_SUBJECTS = "All Subjects";
+  const ALL_LOCATIONS = "All Locations";
+
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [selectedSubject, setSelectedSubject] = useState<string | null>(
-    "All Subjects"
+    ALL_SUBJECTS
   );
   const [selectedLocation, setSelectedLocation] = useState<string | null>(
-    "All Locations"
+    ALL_LOCATIONS
   );
 
-  const subjects = ["All Subjects", ...Object.values(Subjects)];
-  const locations = ["All Locations", ...Object.values(Locations)];
+  const subjects = [ALL_SUBJECTS, ...Object.values(Subjects)];
+  const locations = [ALL_LOCATIONS, ...Object.values(Locations)];
 
   const [filteredItems, setFilteredItems] = useState<
     TeacherType[] | InstitutionType[]
@@ -42,13 +45,12 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
   useEffect(() => {
     if (isSearch) {
       setIsFilterOpen(false);
-      setSelectedSubject("All Subjects");
+      setSelectedSubject(ALL_SUBJECTS);
     }
     setFilteredItems(
       items.filter(
         (item) =>
-          item.subtitle === selectedSubject ||
-          selectedSubject === "All Subjects"
+          item.subtitle === selectedSubject || selectedSubject === ALL_SUBJECTS
       )
     );
   }, [selectedSubject, items, isSearch]);
@@ -56,13 +58,13 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
   useEffect(() => {
     if (isSearch) {
       setIsFilterOpen(false);
-      setSelectedLocation("All Locations");
+      setSelectedLocation(ALL_LOCATIONS);
     }
     setFilteredItems(
       items.filter(
         (item) =>
           item.location === selectedLocation ||
-          selectedLocation === "All Locations"
+          selectedLocation === ALL_LOCATIONS
       )
     );
   }, [selectedLocation, items, isSearch]);
@@ -103,8 +105,8 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
     setIsFilterOpen(!isFilterOpen);
     if (isFilterOpen) {
       setFilteredItems(items);
-      setSelectedSubject("All Subjects");
-      setSelectedLocation("All Locations");
+      setSelectedSubject(ALL_SUBJECTS);
+      setSelectedLocation(ALL_LOCATIONS);
     }
   }
 
@@ -117,7 +119,8 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
             {Platform.OS === "web" ? (
               <Text style={styles.webFilters}>Filters</Text>
             ) : (
-              <Image style={styles.filter}
+              <Image
+                style={styles.filter}
                 source={
                   isFilterOpen
                     ? require("../assets/openFilter.png")
@@ -179,23 +182,23 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: Platform.OS === 'web' ? 'flex-start' : "space-between" ,
+    justifyContent: Platform.OS === "web" ? "flex-start" : "space-between",
     marginBottom: 30,
-    marginRight: 50, 
-    width:'100%'
+    marginRight: 50,
+    width: "100%",
   },
   title: {
     fontSize: 20,
     fontFamily: "exo-600",
     color: colors.darkGrey,
   },
-  filter:{
-    marginRight:15
+  filter: {
+    marginRight: 15,
   },
   webFilters: {
     color: colors.blue,
     fontSize: 16,
-    marginLeft:20,
+    marginLeft: 20,
   },
   horizontalList: {
     flexDirection: "row",

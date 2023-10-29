@@ -7,7 +7,6 @@ import GradeScreen from "../../screens/app/GradeScreen";
 import ProvinceScreen from "../../screens/app/ProvinceScreen";
 import TabNavigator from "./TabNavigator";
 import { Platform } from "react-native";
-import { colors } from "../../utils/colors";
 
 export type StackParamList = {
   SplashScreen: undefined;
