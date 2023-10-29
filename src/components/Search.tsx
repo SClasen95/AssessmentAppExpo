@@ -13,8 +13,8 @@ interface SearchBarProps {
   onFilterPress: () => void;
   onSearchPress: (str: string) => void;
   searchValue: string;
-  onFocus: ()=>void;
-  onBlur:()=>void;
+  onFocus?: ()=>void;
+  onBlur?:()=>void;
 }
 
 const SearchBar = ({

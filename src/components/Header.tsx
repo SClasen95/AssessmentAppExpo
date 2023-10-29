@@ -1,10 +1,19 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Image, StyleSheet, UIManager, LayoutAnimation, Platform } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  UIManager,
+  LayoutAnimation,
+  Platform,
+} from "react-native";
 import { colors } from "../utils/colors";
 import Search from "./Search";
 import { UserContext } from "../../App";
 
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 interface HeaderProps {
   onSearchPress: (str: string) => void;
@@ -16,7 +25,7 @@ function Header({ onSearchPress, searchValue }: HeaderProps) {
   const userData = useContext(UserContext);
 
   const toggleHeader = () => {
-     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); 
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShowHeader(!showHeader);
   };
 
@@ -29,6 +38,17 @@ function Header({ onSearchPress, searchValue }: HeaderProps) {
             <Text style={styles.title}>Good evening!</Text>
             <Text style={styles.subtitle}>{userData?.user?.userName}</Text>
           </View>
+            {Platform.OS === "web" && ( //If its web, bring the search bar up to the top row of the header between the greeting and the profile picture
+              <View style={styles.bottomRowWeb}>
+                <Search
+                  onFilterPress={function (): void {
+                    console.log("Filter button pressed");
+                  }}
+                  onSearchPress={(text) => onSearchPress(text)}
+                  searchValue={searchValue}
+                />
+              </View>
+            )}
           <View style={styles.imageContainer}>
             <Image
               source={require("../assets/profile.png")}
@@ -39,17 +59,19 @@ function Header({ onSearchPress, searchValue }: HeaderProps) {
       )}
 
       {/* Bottom Row */}
-      <View style={Platform.OS === 'web' ? styles.bottomRowWeb : styles.bottomRow}>
-        <Search
-          onFilterPress={function (): void {
-            console.log("Filter button pressed");
-          }}
-          onSearchPress={(text) => onSearchPress(text)}
-          searchValue={searchValue}
-          onFocus={toggleHeader}
-          onBlur = {toggleHeader}
-        />
-      </View>
+      {Platform.OS !== "web" && ( //If its not web, put the searchbar in the second row
+        <View style={styles.bottomRow}>
+          <Search
+            onFilterPress={function (): void {
+              console.log("Filter button pressed");
+            }}
+            onSearchPress={(text) => onSearchPress(text)}
+            searchValue={searchValue}
+            onFocus={toggleHeader}
+            onBlur={toggleHeader}
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -65,12 +87,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily:'exo-600',
+    fontFamily: "exo-600",
     color: colors.darkGrey,
   },
   subtitle: {
     fontSize: 20,
-    fontFamily:'exo-600',
+    fontFamily: "exo-600",
     color: colors.grey,
   },
   imageContainer: {
@@ -97,11 +119,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  bottomRowWeb:{
+  bottomRowWeb: {
     flexDirection: "row",
     alignSelf: "center",
-    width:'50%',
-  }
+    width: "50%",
+  },
 });
 
 export default React.memo(Header);
