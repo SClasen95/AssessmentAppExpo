@@ -32,13 +32,18 @@ function SignUpScreen({ navigation }: SignUpScreenNavigationProp) {
   };
 
   function onSignUp() {
+    const alertTitle = "Invalid Fields"
+    const alertMessage = "Must fill in all fields."
+
     // Store the user input in the context
     if (
       values.email === "" ||
       values.password === "" ||
       values.userName === ""
     ) {
-      Alert.alert("Invalid Fields", "Must fill in all fields.");
+      Platform.OS === "web"
+        ? alert(alertMessage)
+        : Alert.alert(alertTitle, alertMessage);
     } else {
       userData?.setUser(values);
       navigation.navigate("GradeScreen");

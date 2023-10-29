@@ -16,5 +16,6 @@ export const colors = {
     lightPurple: '#DDE1FF',
     lightPink: '#FF9F92',
     lightBlue: '#BFDDEC',
-    background:'#F4F5F9'
+    background:'#F4F5F9',
+    error:'#FF4D4D'
 }
