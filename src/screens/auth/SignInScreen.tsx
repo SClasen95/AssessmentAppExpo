@@ -7,6 +7,8 @@ import {
   Alert,
   Platform,
   ScrollView,
+  UIManager,
+  LayoutAnimation,
 } from "react-native";
 import Button from "../../components/Button";
 import { colors } from "../../utils/colors";
@@ -19,11 +21,43 @@ import { StackParamList } from "../../components/navigators/StackNavigator";
 interface SignInScreenNavigationProp
   extends StackScreenProps<StackParamList, "SignInScreen"> {}
 
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 function SignInScreen({ navigation }: SignInScreenNavigationProp) {
   const userData = useContext(UserContext);
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [isSignUp, setIsSignUp] = useState(true);
+
+  function onSignUp() {
+    // Store the user input in the context
+    const newInvalidFields: string[] = [];
+
+    if (userName === "") {
+      newInvalidFields.push("userName");
+    }
+    if (email === "") {
+      newInvalidFields.push("email");
+    }
+    if (password === "") {
+      newInvalidFields.push("password");
+    }
+
+    setInvalidFields(newInvalidFields);
+
+    if (newInvalidFields.length === 0) {
+      const validUser = {
+        userName: userName,
+        email: email,
+        password: password,
+      };
+      userData?.setUser(validUser);
+      navigation.navigate("GradeScreen");
+    }
+  }
 
   function onSignIn() {
     const newInvalidFields: string[] = [];
@@ -47,19 +81,32 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
     setInvalidFields(newInvalidFields);
   }
 
-  function onSignUp() {
-    navigation.navigate("SignUpScreen");
+  function togleView() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Add animation configuration
+    setIsSignUp(!isSignUp);
   }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Image
-          style={styles.image}
+          style={isSignUp ? styles.signUpImage : styles.signInImage}
           resizeMode="contain"
-          source={require("../../assets/signin.png")}
+          source={
+            isSignUp
+              ? require("../../assets/signup.png")
+              : require("../../assets/signin.png")
+          }
         />
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { marginTop: isSignUp ? 0 : 86 }]}>
+          {isSignUp && (
+            <Input
+              isError={invalidFields.includes("userName")}
+              label={"Name"}
+              placeholder={"Your name"}
+              onChangeText={(text) => setUserName(text)}
+            />
+          )}
           <Input
             isError={invalidFields.includes("email")}
             label={"Email address"}
@@ -79,14 +126,29 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title={"Sign In"} onPress={onSignIn} />
-          <Text style={styles.footerText}>
-            Don't have an account?
-            <Text style={styles.footerLink} onPress={onSignUp}>
-              {" "}
-              Sign Up
-            </Text>
-          </Text>
+          {isSignUp ? (
+            <>
+              <Button title={"Sign Up"} onPress={onSignUp} />
+              <Text style={styles.footerText}>
+                You have account?
+                <Text style={styles.footerLink} onPress={togleView}>
+                  {" "}
+                  Sign In
+                </Text>
+              </Text>
+            </>
+          ) : (
+            <>
+              <Button title={"Sign In"} onPress={onSignIn} />
+              <Text style={styles.footerText}>
+                Don't have an account?
+                <Text style={styles.footerLink} onPress={togleView}>
+                  {" "}
+                  Sign Up
+                </Text>
+              </Text>
+            </>
+          )}
         </View>
       </View>
     </ScrollView>
@@ -101,14 +163,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 34,
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "flex-end",
   },
-  image: {
+  signInImage: {
     width: 266,
     height: 266,
     aspectRatio: 1,
   },
+  signUpImage: {
+    width: 353,
+    height: 235,
+  },
   inputContainer: {
-    marginTop: 85,
     width: Platform.OS === "web" ? "25%" : "100%",
   },
   buttonContainer: {

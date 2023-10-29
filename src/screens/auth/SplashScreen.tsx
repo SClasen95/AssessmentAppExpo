@@ -10,7 +10,7 @@ interface SplashScreenNavigationProp
 
 function SplashScreen({ navigation }: SplashScreenNavigationProp) {
   const onButtonPress = () => {
-    navigation.navigate("SignUpScreen");
+    navigation.navigate("SignInScreen");
   };
 
   return (

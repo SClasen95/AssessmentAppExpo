@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import SplashScreen from "../../screens/auth/SplashScreen";
 import SignInScreen from "../../screens/auth/SignInScreen";
-import SignUpScreen from "../../screens/auth/SignUpScreen";
 import GradeScreen from "../../screens/app/GradeScreen";
 import ProvinceScreen from "../../screens/app/ProvinceScreen";
 import TabNavigator from "./TabNavigator";
@@ -13,7 +12,6 @@ import { colors } from "../../utils/colors";
 export type StackParamList = {
   SplashScreen: undefined;
   SignInScreen: undefined;
-  SignUpScreen: undefined;
   GradeScreen: undefined;
   ProvinceScreen: undefined;
   TabNavigator: undefined;
@@ -37,7 +35,6 @@ function StackNavigator() {
         >
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="SignInScreen" component={SignInScreen} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
           <Stack.Screen name="GradeScreen" component={GradeScreen} />
           <Stack.Screen name="ProvinceScreen" component={ProvinceScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
