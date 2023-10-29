@@ -18,6 +18,7 @@ interface InputProps {
   placeholder: string;
   style?: object;
   keyboardType?: KeyboardTypeOptions;
+  isError: boolean;
 }
 
 function Input({
@@ -27,6 +28,7 @@ function Input({
   onChangeText,
   placeholder,
   style,
+  isError,
   ...props
 }: InputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -61,6 +63,7 @@ function Input({
           </Pressable>
         ) : null}
       </View>
+      <Text style={styles.invalidField}>{isError ? "Invalid field.": ""}</Text>
     </View>
   );
 }
@@ -69,7 +72,6 @@ export default React.memo(Input);
 
 export const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
     minWidth: "100%",
   },
   label: {
@@ -114,5 +116,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     flex: 1,
     color: colors.lightGrey,
+  },
+  invalidField: {
+    color: colors.error,
+    marginLeft:10,
   },
 });

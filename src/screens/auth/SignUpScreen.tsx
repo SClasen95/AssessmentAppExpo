@@ -21,6 +21,7 @@ interface SignUpScreenNavigationProp
 
 function SignUpScreen({ navigation }: SignUpScreenNavigationProp) {
   const userData = useContext(UserContext);
+  const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [values, setValues] = useState<ValidUserType>({
     userName: "",
     email: "",
@@ -32,23 +33,27 @@ function SignUpScreen({ navigation }: SignUpScreenNavigationProp) {
   };
 
   function onSignUp() {
-    const alertTitle = "Invalid Fields"
-    const alertMessage = "Must fill in all fields."
-
     // Store the user input in the context
-    if (
-      values.email === "" ||
-      values.password === "" ||
-      values.userName === ""
-    ) {
-      Platform.OS === "web"
-        ? alert(alertMessage)
-        : Alert.alert(alertTitle, alertMessage);
-    } else {
+    const newInvalidFields: string[] = [];
+  
+    if (values.userName === "") {
+      newInvalidFields.push("userName");
+    }
+    if (values.email === "") {
+      newInvalidFields.push("email");
+    }
+    if (values.password === "") {
+      newInvalidFields.push("password");
+    }
+  
+    setInvalidFields(newInvalidFields);
+  
+    if (newInvalidFields.length === 0) {
       userData?.setUser(values);
       navigation.navigate("GradeScreen");
     }
   }
+  
 
   function onSignIn() {
     navigation.navigate("SignInScreen");
@@ -64,17 +69,20 @@ function SignUpScreen({ navigation }: SignUpScreenNavigationProp) {
         />
         <View style={styles.inputContainer}>
           <Input
+            isError={invalidFields.includes("userName")}
             label={"Name"}
             placeholder={"Your name"}
             onChangeText={(v) => onChange("userName", v)}
           />
           <Input
+            isError={invalidFields.includes("email")}
             label={"Email address"}
             placeholder={"name@example.com"}
             keyboardType="email-address"
             onChangeText={(v) => onChange("email", v)}
           />
           <Input
+            isError={invalidFields.includes("password")}
             label={"Password"}
             placeholder={"*********"}
             isPassword
@@ -111,13 +119,14 @@ const styles = StyleSheet.create({
     height: 235,
   },
   inputContainer: {
-    marginTop: 51,
+    marginTop: 40,
     width: Platform.OS === "web" ? "25%" : "100%",
   },
   buttonContainer: {
     width: Platform.OS === "web" ? "25%" : "80%",
     position: "relative",
     marginBottom: 76,
+    marginTop:20
   },
   footerText: {
     fontFamily: "exo-400",

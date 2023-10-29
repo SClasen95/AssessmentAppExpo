@@ -21,33 +21,32 @@ interface SignInScreenNavigationProp
 
 function SignInScreen({ navigation }: SignInScreenNavigationProp) {
   const userData = useContext(UserContext);
-
+  const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function onSignIn() {
-    const alertTitle = "Invalid Fields"
-    const alertMessage = "Must fill in all fields."
-    const alertInvalidMessage = "Invalid email or password"
+    const newInvalidFields: string[] = [];
 
-    if (email === "" || password === "") {
-      Platform.OS === "web"
-        ? alert(alertMessage)
-        : Alert.alert(alertTitle, alertMessage);
+    let validUser = ValidUsers.find(
+      (item) => item.email === email && item.password === password
+    );
+
+    if (validUser) {
+      navigation.navigate("GradeScreen");
+      userData?.setUser(validUser);
     } else {
-      let validUser = ValidUsers.find(
-        (item) => item.email === email && item.password === password
-      );
-      if (validUser) {
-        navigation.navigate("GradeScreen");
-        userData?.setUser(validUser);
-      } else {
-        Platform.OS === "web"
-          ? alert(alertInvalidMessage)
-          : Alert.alert(alertTitle, alertInvalidMessage);
+      if (!ValidUsers.some((user) => user.email === email)) {
+        newInvalidFields.push("email");
+      }
+
+      if (!ValidUsers.some((user) => user.password === password)) {
+        newInvalidFields.push("password");
       }
     }
+    setInvalidFields(newInvalidFields);
   }
+
   function onSignUp() {
     navigation.navigate("SignUpScreen");
   }
@@ -62,6 +61,7 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
         />
         <View style={styles.inputContainer}>
           <Input
+            isError={invalidFields.includes("email")}
             label={"Email address"}
             placeholder={"name@example.com"}
             value={email}
@@ -69,6 +69,7 @@ function SignInScreen({ navigation }: SignInScreenNavigationProp) {
             onChangeText={(text) => setEmail(text)}
           />
           <Input
+            isError={invalidFields.includes("password")}
             label={"Password"}
             placeholder={"*********"}
             isPassword
