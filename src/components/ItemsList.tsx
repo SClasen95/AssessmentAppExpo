@@ -117,7 +117,7 @@ function ItemsList({ title, horizontal, items, isSearch }: ItemsListProps) {
             {Platform.OS === "web" ? (
               <Text style={styles.webFilters}>Filters</Text>
             ) : (
-              <Image
+              <Image style={styles.filter}
                 source={
                   isFilterOpen
                     ? require("../assets/openFilter.png")
@@ -179,18 +179,23 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: Platform.OS === 'web' ? 'flex-start' : "space-between" ,
     marginBottom: 30,
-    marginRight: 50,    
+    marginRight: 50, 
+    width:'100%'
   },
   title: {
     fontSize: 20,
     fontFamily: "exo-600",
     color: colors.darkGrey,
   },
+  filter:{
+    marginRight:15
+  },
   webFilters: {
     color: colors.blue,
     fontSize: 16,
+    marginLeft:20,
   },
   horizontalList: {
     flexDirection: "row",
